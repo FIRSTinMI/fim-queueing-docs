@@ -26,6 +26,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "FIM Queueing Documentation Release ${{ env.GITHUB_RUN_NUMBER }}"
+          title: "FIM Queueing Documentation Release ${{ github.run_number }}"
           files: |
             output/fim-queueing-docs.pdf
