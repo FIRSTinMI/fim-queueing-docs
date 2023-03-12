@@ -28,4 +28,3 @@ jobs:
           title: "FIM Queueing Documentation Release ${{ env.GITHUB_RUN_NUMBER }}"
           files: |
             output/fim-queueing-docs.pdf
-    
