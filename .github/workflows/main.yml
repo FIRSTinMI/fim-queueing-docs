@@ -9,9 +9,16 @@ jobs:
   make_pdf:
     runs-on: ubuntu-18.04
     steps:
+      - name: create file list
+        id: files_list
+        run: |
+          shopt -s extglob
+          mkdir output  # create output dir
+          echo "::set-output name=files::$(printf '"%s" ' !(README).md)"
+          shopt -u extglob
       - uses: docker://pandoc/latex:2.9
         with:
-          args: "-V fontfamily:ClearSans -V fontfamilyoptions:sfdefault --toc -o 'output/fim-queueing-docs.pdf' *.md"
+          args: "-V fontfamily:ClearSans -V fontfamilyoptions:sfdefault --toc -o 'output/fim-queueing-docs.pdf' ${{ steps.files_list.outputs.files }}"
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
