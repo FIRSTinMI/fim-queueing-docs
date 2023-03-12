@@ -21,6 +21,10 @@ jobs:
       - uses: docker://pandoc/latex:2.9
         with:
           args: "--toc -o output/fim-queueing-docs.pdf ${{ steps.files_list.outputs.files }}"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: out_pdf
+          path: output/fim-queueing-docs.pdf
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -42,7 +46,13 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Copy index
         run: |
+          mkdir output
           cp index.html output
+      - name: Download PDF
+        uses: actions/download-artifact@v2
+        with:
+          name: out_pdf
+          path: output
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
