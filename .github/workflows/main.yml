@@ -15,7 +15,7 @@ jobs:
           shopt -s extglob
           cd $GITHUB_WORKSPACE
           mkdir output  # create output dir
-          echo "files=$(printf '"%s" ' !(README).md)" >> $GITHUB_OUTPUT
+          echo "files=$(printf '"%s" ' *.md | sed 's/"README.md"//g')" >> $GITHUB_OUTPUT
           shopt -u extglob
       - uses: docker://pandoc/latex:2.9
         with:
