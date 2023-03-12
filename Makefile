@@ -1,2 +1,3 @@
+SHELL=/bin/bash -O extglob -c
 build:
-	pandoc -V fontfamily:ClearSans -V fontfamilyoptions:sfdefault --toc -o ouyput/doc.pdf *.md
+	pandoc --toc -o output/doc.pdf !(README).md
