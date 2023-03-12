@@ -1,6 +1,5 @@
 ---
 title: FIM Queueing
-fontfamily: sans
 numbersections: true
 colorlinks: true
 linkcolor: blue
