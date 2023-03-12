@@ -30,6 +30,7 @@ jobs:
           files: |
             output/fim-queueing-docs.pdf
   deploy:
+    needs: make_pdf
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
