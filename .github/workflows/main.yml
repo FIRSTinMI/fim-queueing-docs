@@ -20,7 +20,7 @@ jobs:
           shopt -u extglob
       - uses: docker://pandoc/latex:2.9
         with:
-          args: "-V fontfamily:ClearSans -V fontfamilyoptions:sfdefault --toc -o output/fim-queueing-docs.pdf ${{ steps.files_list.outputs.files }}"
+          args: "--toc -o output/fim-queueing-docs.pdf ${{ steps.files_list.outputs.files }}"
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
