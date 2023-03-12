@@ -13,8 +13,9 @@ jobs:
         id: files_list
         run: |
           shopt -s extglob
+          cd $GITHUB_WORKSPACE
           mkdir output  # create output dir
-          echo "::set-output name=files::$(printf '"%s" ' !(README).md)"
+          echo "files=$(printf '"%s" ' !(README).md)" >> $GITHUB_OUTPUT
           shopt -u extglob
       - uses: docker://pandoc/latex:2.9
         with:
