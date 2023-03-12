@@ -1,0 +1,23 @@
+name: Build and Publish Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  make_pdf:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: "-V fontfamily:ClearSans -V fontfamilyoptions:sfdefault --toc -o 'output/fim-queueing-docs.pdf' *.md"
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "FIM Queueing Documentation Release ${{ env.GITHUB_RUN_NUMBER }}"
+          files: |
+            output/fim-queueing-docs.pdf
+    
